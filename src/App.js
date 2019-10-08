@@ -1,26 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import House from "./components/House";
+import HouseList from "./components/HouseList";
+import firehouse from "./components/data/firehouse";
+import "./App.css";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      houses: firehouse,
+      currentHouse: null
+    };
+    this.selectHouse = this.selectHouse.bind(this);
+  }
+
+  selectHouse(house) {
+    this.setState({
+      currentHouse: house
+    });
+  }
+
+  render() {
+    return (
+      <div className='App'>
+        <HouseList houses={this.state.houses} selectHouse={this.selectHouse} />
+        <House current={this.state.currentHouse} />
+      </div>
+    );
+  }
 }
-
 export default App;
